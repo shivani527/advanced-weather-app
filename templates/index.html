@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Advanced Weather App</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="weather-card">
+
+        <h1>Weather App</h1>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="city"
+                placeholder="Enter City Name"
+                required>
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+        {% if weather %}
+
+            {% if weather == 'error' %}
+
+                <h2 class="error">
+                    City Not Found
+                </h2>
+
+            {% else %}
+
+                <div class="weather-info">
+
+                    <h2>{{ weather.city }}</h2>
+                    <img
+                    src="https://openweathermap.org/img/wn/{{ weather.icon }}@4x.png"
+                    alt="Weather Icon">
+
+
+
+                    <h3>{{ weather.temperature }} °C</h3>
+
+                    <p>{{ weather.description }}</p>
+
+                    <div class="details">
+
+                        <div>
+                            <span>Humidity</span>
+                            <h4>{{ weather.humidity }}%</h4>
+                        </div>
+
+                        <div>
+                            <span>Wind</span>
+                            <h4>{{ weather.wind }} km/h</h4>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
